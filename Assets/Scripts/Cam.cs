@@ -19,13 +19,16 @@ public class Cam : MonoBehaviour
     {
         if (Input.touchCount == 1)
         {
-            if (Input.GetTouch(0).phase != TouchPhase.Began)
+            if (Input.GetTouch(0).phase == TouchPhase.Began)
+            {
+                TouchX = TouchX - Input.GetTouch(0).position.x;
+            }
+            else
             {
                 if (TouchX == -1)
                     TouchX = Input.GetTouch(0).position.x;
-                else;
+
             }
-                TouchX = TouchX - Input.GetTouch(0).position.x;
             if (TouchX != 0)
             {
                 rot(TouchX);
