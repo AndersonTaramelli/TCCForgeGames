@@ -36,4 +36,9 @@ public class PlayerController : MonoBehaviour
             anim.SetBool("Run", false);
         }
     }
+
+    void Attack()
+    {
+
+    }
 }

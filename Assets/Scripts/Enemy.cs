@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindWithTag ("Player");
         navMesh = GetComponent<UnityEngine.AI.NavMeshAgent>();
         currentHealth = Life;
+
     }
     
     void Update()
@@ -26,7 +27,7 @@ public class Enemy : MonoBehaviour
         navMesh.destination = player.transform.position;
         if (Vector3.Distance(transform.position,player.transform.position) < 1.5f)
         {
-            anim.SetBool("run", true);
+            Andar();
             Attack();
         }
         if (Life <= 0)
@@ -34,6 +35,11 @@ public class Enemy : MonoBehaviour
             Life = 0;
             Die();
         }
+    }
+
+    void Andar()
+    {
+        anim.SetBool("Corre", true);
     }
 
     void Attack()
