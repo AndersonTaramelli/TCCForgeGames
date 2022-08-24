@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: e1f26826d47a92c43ba9d8e7bfa95801
   - enabled: 1
-    path: Assets/Scenes/Forge Games TCC v4.unity
-    guid: 59a1b41480d6f8b4998fe3974bb43779
+    path: Assets/Scenes/Forge Games TCC v8.unity
+    guid: f9d70a1a4c4667d4587d0f178ebf1671
   m_configObjects: {}

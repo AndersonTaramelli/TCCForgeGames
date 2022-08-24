@@ -1565,7 +1565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad0db72ce1908845963de8c7e1a1a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nameOfGme: Forge Games TCC v4
+  nameOfGme: Forge Games TCC v8
   painelMainMenu: {fileID: 387619606}
   painelSettings: {fileID: 2123840826}
 --- !u!4 &797410804
