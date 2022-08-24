@@ -9,7 +9,7 @@ public class Cam : MonoBehaviour
 
     [Range(0, 1)]
     public float safe = 0.2f;
-    public Transform player;
+    private Transform player;
 
     public Transform Aster;
 
@@ -19,25 +19,27 @@ public class Cam : MonoBehaviour
     {
         if (Input.touchCount == 1)
         {
-            if (Input.GetTouch(0).phase == TouchPhase.Began)
-            {
-                TouchX = TouchX - Input.GetTouch(0).position.x;
-            }
-            else
+            if (Input.GetTouch(0).phase != TouchPhase.Began)
             {
                 if (TouchX == -1)
                     TouchX = Input.GetTouch(0).position.x;
 
             }
-            if (TouchX != 0)
+            else
             {
-                rot(TouchX);
-
-                TouchX = Input.GetTouch(0).position.x;
+                TouchX = TouchX - Input.GetTouch(0).position.x;
             }
+                if (TouchX != 0)
+                {
+                    rot(TouchX);
+
+                    TouchX = Input.GetTouch(0).position.x;
+                }
         }
         else
-        TouchX = -1;
+        {
+            TouchX = -1;
+        }
     }
 
     void FixedUpdate()

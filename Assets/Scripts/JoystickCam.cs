@@ -37,6 +37,6 @@ public class JoystickCam : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void OnPointerUp(PointerEventData eventData)
     {
         axis = Vector2.zero;
-        stick.localPosition = new Vector3(500, 300, 0);
+        stick.localPosition = new Vector3(0, 0, 0);
     }
 }
