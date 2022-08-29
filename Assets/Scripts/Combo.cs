@@ -28,13 +28,13 @@ public class Combo : MonoBehaviour
             noOfClicks = 0;
         }
 
-        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire1"))
+        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Attack"))
         {
             lastClickedTime = Time.time;
             noOfClicks++;
             if (noOfClicks == 1)
             {
-                anim.SetBool("1", true);
+                anim.SetBool("Attack", true);
             }
             noOfClicks = Mathf.Clamp(noOfClicks, 0, 3);
         }
