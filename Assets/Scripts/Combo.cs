@@ -35,41 +35,10 @@ public class Combo : MonoBehaviour
             if (noOfClicks == 1)
             {
                 anim.SetBool("Attack", true);
+            
             }
             noOfClicks = Mathf.Clamp(noOfClicks, 0, 3);
         }
-    }
-    public void return1()
-    {
-        if (noOfClicks >= 2)
-        {
-            anim.SetBool("2", true);
-        }
-        else
-        {
-            anim.SetBool("1", false);
-            noOfClicks = 0;
-        }
-    }
-    public void return2()
-    {
-        if (noOfClicks >= 3)
-        {
-            anim.SetBool("3", true);
-        }
-        else
-        {
-            anim.SetBool("2", false);
-            anim.SetBool("1", false);
-            noOfClicks = 0;
-        }
-    }
-    public void return3()
-    {
-        anim.SetBool("1", false);
-        anim.SetBool("2", false);
-        anim.SetBool("3", false);
-        noOfClicks = 0;
     }
     public void attack()
     {
