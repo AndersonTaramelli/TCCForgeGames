@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
 
-    [SerializeField] private string nameOfGme;
+    [SerializeField] private string nameOfGame;
 
     [SerializeField] private GameObject painelMainMenu;
     [SerializeField] private GameObject painelSettings;
 
     public void Play()
     {
-        SceneManager.LoadScene(nameOfGme);
+        SceneManager.LoadScene(nameOfGame);
     }
 
     public void OpenSettings()
