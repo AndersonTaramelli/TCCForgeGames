@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class player : MonoBehaviour
 {
     public int Life = 100;
+    public int LifeAtual;
     public float Speed;
     public Animator anim;
 
@@ -16,6 +17,7 @@ public class PlayerController : MonoBehaviour
     //protected float CameraAngleSpeed = 0.2f;
 
     public JoystickVirtual joystickVirtual;
+    private static Vector3 position;
 
     //private int joystickVirtual.axis.xHash = Animator.StringToHash("joystickVirtual.axis.x");
     //private int joystickVirtual.axis.yHash = Animator.StringToHash("joystickVirtual.axis.y");
@@ -29,13 +31,16 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
+        LifeAtual = Life;
     }
 
     
     void Update()
     {
-
+        if (Enemy.position == player.position)
+        {
+            SofrerDano(10);
+        }
         //CameraAngle += TouchField.TouchDist.x * CameraAngleSpeed;
 
         //Camera.main.transform.position = transform.position + Quaternion.AngleAxis(CameraAngle, Vector3.up) * new Vector3(0, 3, 4);
@@ -56,8 +61,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Attack()
+    void SofrerDano(int dano)
     {
-
+        LifeAtual -= 10;
     }
 }
