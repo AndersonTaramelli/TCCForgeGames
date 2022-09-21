@@ -12,7 +12,6 @@ public class Enemy : MonoBehaviour
     private bool CanAttack;
 
     public Animator anim;
-    internal static Vector3 position;
 
     void Start()
     {
@@ -48,7 +47,7 @@ public class Enemy : MonoBehaviour
         if (CanAttack == true)
         {
             StartCoroutine("TimeToAttack");
-            player.GetComponent<player>().Life -= 10;
+            player.GetComponent<PlayerController>().Life -= 10;
         }
     }
 
