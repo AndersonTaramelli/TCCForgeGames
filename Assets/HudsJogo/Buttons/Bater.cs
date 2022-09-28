@@ -13,7 +13,7 @@ public class Bater : MonoBehaviour
     void Start()
     {
         anim = gameObject.GetComponent<Animator>();
-        ataque = gameObject.GetComponent<AttackButton>();
+        //ataque = gameObject.GetComponent<AttackButton>();
     }
 
     void batendo()

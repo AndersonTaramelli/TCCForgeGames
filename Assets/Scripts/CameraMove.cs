@@ -13,6 +13,8 @@ public class CameraMove : MonoBehaviour
 
     private Vector3 origRot;
 
+    public JoystickVirtual joystickVirtual;
+
     public float rotSpeed = 0.5f;
     public float dir = -1;
 
@@ -28,23 +30,30 @@ public class CameraMove : MonoBehaviour
 
         foreach (Touch touch in Input.touches)
         {
-            if (touch.phase == TouchPhase.Began)
-            {
-                initTouch = touch;
-            }
-            else if (touch.phase == TouchPhase.Moved)
-            {
-                float deltaX = initTouch.position.x - touch.position.x;
-                float deltaY = initTouch.position.y - touch.position.y;
-                rotX -= deltaY * Time.deltaTime * rotSpeed * dir;
-                rotY += deltaX * Time.deltaTime * rotSpeed * dir;
-                rotX = Mathf.Clamp(rotX, -45f, 45f);
-                cam.transform.eulerAngles = new Vector3(rotX, rotY, 0f);
-            }
-            else if (touch.phase == TouchPhase.Ended)
-            {
-                initTouch = new Touch();
-            }
+            //if ()
+            //{
+               
+            //}
+            //else
+            //{
+                if (touch.phase == TouchPhase.Began)
+                {
+                    initTouch = touch;
+                }
+                else if (touch.phase == TouchPhase.Moved)
+                {
+                    float deltaX = initTouch.position.x - touch.position.x;
+                    float deltaY = initTouch.position.y - touch.position.y;
+                    rotX -= deltaY * Time.deltaTime * rotSpeed * dir;
+                    rotY += deltaX * Time.deltaTime * rotSpeed * dir;
+                    rotX = Mathf.Clamp(rotX, -45f, 45f);
+                    cam.transform.eulerAngles = new Vector3(rotX, rotY, 0f);
+                }
+                else if (touch.phase == TouchPhase.Ended)
+                {
+                    initTouch = new Touch();
+                }
+            //}
         }
     }
 }
