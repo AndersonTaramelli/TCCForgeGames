@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class ControladorSom : MonoBehaviour
 {
 
-    [SerializeField] private AudioSource fundoMusica;
+    [SerializeField] private AudioSource Andando;
 
     public void VolumeMusica(float value)
     {
-        fundoMusica.volume = value;
+        Andando.volume = value;
     }
 }

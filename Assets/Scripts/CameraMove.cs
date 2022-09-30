@@ -15,6 +15,8 @@ public class CameraMove : MonoBehaviour
 
     public JoystickVirtual joystickVirtual;
 
+    [SerializeField] private Transform lookAt;
+
     public float rotSpeed = 0.5f;
     public float dir = -1;
 
