@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController characterController;
 
-    public JoystickVirtual joystickVirtual;
+    private JoystickVirtual joystickVirtual;
 
     [SerializeField]private AudioSource passosAudioSource;
     [SerializeField]private AudioClip[] passosAudioClip;
@@ -30,7 +31,7 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        
+
         anim.SetFloat("joystickVirtual.axis.x", joystickVirtual.axis.x);
         anim.SetFloat("joystickVirtual.axis.y", joystickVirtual.axis.y);
 
@@ -44,11 +45,11 @@ public class PlayerController : MonoBehaviour
         {
         
         }
+
     }
 
     void Attack()
     {
-
     }
 
     private void Passos()
