@@ -11,4 +11,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Forge Games TCC.unity
     guid: aeee9087ab0c45e4f8ca8f11d1b02c21
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 1257a64a2b9d73346ba58366bd4e65d5, type: 2}

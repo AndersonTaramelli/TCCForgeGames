@@ -1,35 +1,31 @@
-using Cinemachine;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Cam : MonoBehaviour
 {
-    
-    [SerializeField] private UITouchPanel touchInput;
+    public Transform Player;
+    public float YOffset;
+    public float Sensibility;
+    public float LimitRotation;
 
-    private Vector2 _lookInput;
+    float rotX;
+    float rotY;
 
-    [SerializeField] private float _touchSpeedSensibilityX = 3f;
-    [SerializeField] private float _touchSpeedSensibilityY = 3f;
-
-    private string _touchXMapTo = "Mouse X";
-    private string _touchYMapTo = "Mouse Y";
-
-    void Start()
+    void Update()
     {
-        CinemachineCore.GetInputAxis = GetInputAxis;
+        float Mouse_X = Input.GetAxis("Mouse Y");
+        float Mouse_Y = Input.GetAxis("Mouse X");
+
+        rotX -= Mouse_X * Sensibility * Time.deltaTime;
+        rotY += Mouse_Y * Sensibility * Time.deltaTime;
+
+        rotX = Mathf.Clamp(rotX, -LimitRotation, LimitRotation);
+
+        transform.rotation = Quaternion.Euler(rotX, rotY, 0);
     }
-
-
-    private float GetInputAxis(string axisName)
+    private void LateUpdate()
     {
-        _lookInput = touchInput.PlayerJoystickOutputVector();
-
-        if (axisName == _touchXMapTo)
-            return _lookInput.x / _touchSpeedSensibilityX;
-
-        if (axisName == _touchYMapTo)
-            return _lookInput.y / _touchSpeedSensibilityY;
-
-        return Input.GetAxis(axisName);
+        transform.position = Player.position + Player.up * YOffset;
     }
 }

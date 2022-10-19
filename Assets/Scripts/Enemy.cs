@@ -47,7 +47,7 @@ public class Enemy : MonoBehaviour
         if (CanAttack == true)
         {
             StartCoroutine("TimeToAttack");
-            player.GetComponent<PlayerController>().Life -= 10;
+            player.GetComponent<PlayerController>().vidaAtual -= 10;
         }
     }
 
