@@ -11,6 +11,11 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField] private GameObject painelMainMenu;
     [SerializeField] private GameObject painelSettings;
 
+    public void start()
+    {
+        Cursor.visible = true;
+    }
+
     public void Play()
     {
         SceneManager.LoadScene(nameOfGame);

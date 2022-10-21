@@ -11,7 +11,7 @@ public class Combo : MonoBehaviour
 
     public Transform attackPoint;
     public float attackRange = 0.5f;
-    public LayerMask TestLayers;
+    public LayerMask EnemyLayers;
 
     public int attackDamage = 10;
 
@@ -39,17 +39,18 @@ public class Combo : MonoBehaviour
             {
                 anim.SetBool("1", false);
             }
-            //noOfClicks = Mathf.Clamp(noOfClicks, 0, 3);
+            noOfClicks = Mathf.Clamp(noOfClicks, 0, 3);
+
         }
     }
 
     public void attack()
     {
-        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, TestLayers);
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, EnemyLayers);
 
-        foreach (Collider Test in hitEnemies)
+        foreach (Collider Enemy in hitEnemies)
         {
-            Test.GetComponent<Enemy>().TakeDamage(attackDamage);
+            Enemy.GetComponent<Enemy>().TakeDamage(attackDamage);
         }
     }
 

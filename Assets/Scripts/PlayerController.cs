@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private string nameOfGame;
 
     public int vidaAtual;
     private int vidaTotal = 100;
@@ -25,6 +27,14 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private GameObject Options;
 
+    public Rigidbody rb;
+    public float JumpForce;
+
+    public LayerMask layerMask;
+    public bool IsGrounded;
+    public float GroundCheckSize;
+    public Vector3 GroundCheckPosition;
+
     void Awake()
     {
         characterController = GetComponent<CharacterController>();
@@ -35,6 +45,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         vidaAtual = vidaTotal;
+
+        Cursor.visible = false;
 
         barraDeVida.AlterarBarraDeVida(vidaAtual, vidaTotal);
     }
@@ -62,15 +74,41 @@ public class PlayerController : MonoBehaviour
         {
             vidaAtual = 0;
             Death();
+            SceneManager.LoadScene(nameOfGame);
         }
 
         barraDeVida.AlterarBarraDeVida(vidaAtual, vidaTotal);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            Cursor.visible = true;
             AbreMenu();
         }
+        
+        var groundcheck = Physics.OverlapSphere(transform.position + GroundCheckPosition, GroundCheckSize, layerMask);
 
+        if (groundcheck.Length != 0)
+        {
+            IsGrounded = true;
+        }
+        else
+        {
+            IsGrounded = false;
+        }
+        anim.SetBool("Jump", !IsGrounded);
+
+        if(IsGrounded == true && Input.GetKeyDown(KeyCode.Space))
+        {
+            rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
+            anim.SetBool("Jump", true);
+        }
+
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + GroundCheckPosition, GroundCheckSize); 
     }
 
     public void AbreMenu()
