@@ -138,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 158126996410515392, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 158126996410515394, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -767,7 +771,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 1}
+    m_HighlightedColor: {r: 0.3962264, g: 0.3962264, b: 0.3962264, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -789,10 +793,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 326867308}
-        m_TargetAssemblyTypeName: MenuGame, Assembly-CSharp
-        m_MethodName: Resume
-        m_Mode: 1
+      - m_Target: {fileID: 1936132268}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -800,7 +804,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
 --- !u!114 &238880708
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1472,6 +1476,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 158126996410515392, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 158126996410515394, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
       propertyPath: m_Layer
       value: 6
@@ -2137,6 +2145,10 @@ PrefabInstance:
     - target: {fileID: 76763701625454637, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 158126996410515392, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 158126996410515394, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
       propertyPath: m_Layer
@@ -2938,10 +2950,10 @@ RectTransform:
   m_Father: {fileID: 1631588487}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1000, y: 800}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1936132270
 MonoBehaviour:
@@ -4277,20 +4289,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.020480782, y: -0.18572724, z: 0.20699932}
     m_Extent: {x: 0.60649216, y: 1.1745905, z: 0.62453115}
   m_DirtyAABB: 0
---- !u!64 &2268565445559919055
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3753089935248270420}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5495902117074765545, guid: 20a011b6dc59cf24db5319996a30a5cb, type: 3}
 --- !u!4 &2357267481140155622
 Transform:
   m_ObjectHideFlags: 0
@@ -4553,7 +4551,8 @@ GameObject:
   - component: {fileID: 4566218763583717102}
   - component: {fileID: 644485683639906635}
   - component: {fileID: 3392718058941220225}
-  - component: {fileID: 2268565445559919055}
+  - component: {fileID: 4566218763583717103}
+  - component: {fileID: 4566218763583717104}
   m_Layer: 3
   m_Name: dragon_slayer
   m_TagString: Untagged
@@ -4670,6 +4669,31 @@ Transform:
   m_Father: {fileID: 3724273724282809309}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4566218763583717103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3753089935248270420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aae30ac84be6e5b42999c6507575a5ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &4566218763583717104
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3753089935248270420}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.06141102, y: 0.020000035, z: 0.26126367}
+  m_Center: {x: 0.00001955572, y: 0.0000011598171, z: 0.12110928}
 --- !u!1 &4585192172832522620
 GameObject:
   m_ObjectHideFlags: 0
@@ -4898,7 +4922,7 @@ MonoBehaviour:
   passosAudioClip:
   - {fileID: 8300000, guid: 86b57b2c94c67e94f975e5056d601631, type: 3}
   MainCamera: {fileID: 806783378}
-  Options: {fileID: 1936132268}
+  MenuGame: {fileID: 1936132268}
   rb: {fileID: 5641734108681752622}
   JumpForce: 6
   layerMask:
@@ -4926,7 +4950,7 @@ MonoBehaviour:
   attackRange: 1.07
   EnemyLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   attackDamage: 10
 --- !u!4 &5679917819040385509
 Transform:
@@ -4989,6 +5013,10 @@ PrefabInstance:
     - target: {fileID: 76763701625454637, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 158126996410515392, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 158126996410515394, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
       propertyPath: m_Layer
@@ -5161,6 +5189,10 @@ PrefabInstance:
     - target: {fileID: 8847076541339545899, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 9037894672291764263, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
+      propertyPath: attackDamage
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9037894672291764281, guid: f741bf53caa094b46b1de4bf48b394a9, type: 3}
       propertyPath: m_RootOrder

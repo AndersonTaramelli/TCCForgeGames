@@ -10,8 +10,11 @@ public class Enemy : MonoBehaviour
     private GameObject player;
     private UnityEngine.AI.NavMeshAgent navMesh;
     private bool CanAttack;
+    public int attackDamage;
 
     public Animator anim;
+
+    
 
     void Start()
     {
@@ -51,9 +54,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int attackDamage)
     {
-        currentHealth -= damage;
+        currentHealth -= attackDamage;
 
         if (currentHealth <= 0)
         {
@@ -73,5 +76,18 @@ public class Enemy : MonoBehaviour
         CanAttack = false;
         yield return new WaitForSeconds(1);
         CanAttack = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "dragon_slayer")
+        {
+            currentHealth -= attackDamage;
+        }
+
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }

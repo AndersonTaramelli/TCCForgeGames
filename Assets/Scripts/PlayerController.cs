@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
     Vector3 Direction;
     public Camera MainCamera;
 
-    [SerializeField] private GameObject Options;
+    [SerializeField] private GameObject MenuGame;
 
     public Rigidbody rb;
     public float JumpForce;
@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Cursor.visible = true;
+            Pause();
             AbreMenu();
         }
         
@@ -113,12 +114,18 @@ public class PlayerController : MonoBehaviour
 
     public void AbreMenu()
     {
-        Options.SetActive(true);
+        MenuGame.SetActive(true);
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
     }
 
     void Death()
     {
         anim.SetBool("Death", true);
+        Cursor.visible = true;
     }
 
     private void Passos()

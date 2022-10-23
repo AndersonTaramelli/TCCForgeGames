@@ -12,6 +12,7 @@ public class MenuGame : MonoBehaviour
     public void Resume()
     {
         painelMainMenu.SetActive(false);
+        Cursor.visible = false;
     }
 
     public void OpenSettings()
