@@ -7,7 +7,7 @@ public class Combo : MonoBehaviour
     public Animator anim;
     public int noOfClicks = 0;
     float lastClickedTime = 0;
-    public float maxComboDelay = 1.0f;
+    public float maxComboDelay = 0.2f;
 
     public Transform attackPoint;
     public float attackRange = 0.5f;
@@ -27,10 +27,9 @@ public class Combo : MonoBehaviour
             noOfClicks = 0;
         }
 
-        if (Input.GetMouseButtonDown(0) || Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1"))
         {
             lastClickedTime = Time.time;
-            noOfClicks++;
             if (noOfClicks == 1)
             {
                 anim.SetBool("1", true);
@@ -39,8 +38,12 @@ public class Combo : MonoBehaviour
             {
                 anim.SetBool("1", false);
             }
-            noOfClicks = Mathf.Clamp(noOfClicks, 0, 3);
-
+            noOfClicks++;
+            if (noOfClicks > 1)
+            {
+                anim.SetBool("Idle", true);
+                noOfClicks = 0;
+            }
         }
     }
 
@@ -61,4 +64,5 @@ public class Combo : MonoBehaviour
 
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
+
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float Speed;
-    public int Life = 30;
+    public int Life = 10;
     private int currentHealth;
     private GameObject player;
     private UnityEngine.AI.NavMeshAgent navMesh;
@@ -27,15 +27,14 @@ public class Enemy : MonoBehaviour
     
     void Update()
     {
+        Andar();
         navMesh.destination = player.transform.position;
         if (Vector3.Distance(transform.position,player.transform.position) < 1.5f)
         {
-            Andar();
             Attack();
         }
-        if (Life <= 0)
+        if (currentHealth <= 0)
         {
-            Life = 0;
             Die();
         }
     }
@@ -51,6 +50,7 @@ public class Enemy : MonoBehaviour
         {
             StartCoroutine("TimeToAttack");
             player.GetComponent<PlayerController>().vidaAtual -= 10;
+            anim.SetBool("attack", true);
         }
     }
 
@@ -67,6 +67,12 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         Debug.Log("Enemy died");
+
+        if (currentHealth == 0)
+        {
+            CanAttack = false;
+            navMesh.destination = transform.position;
+        }
 
         anim.SetBool("Die", true);
     }
