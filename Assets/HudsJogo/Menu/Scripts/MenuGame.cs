@@ -5,26 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class MenuGame : MonoBehaviour
 {   
-    [SerializeField] private string nameOfGame;
-    [SerializeField] private GameObject painelMainMenu;
-    [SerializeField] private GameObject painelSettings;
+    [SerializeField] private string nameOfGame; //Voltar a Tela inicial
+    [SerializeField] private GameObject painelMenu; //Menu do pause
+    [SerializeField] private GameObject painelSettings; //Opções do jogo
 
     public void Resume()
     {
-        painelMainMenu.SetActive(false);
+        painelMenu.SetActive(false);
         Cursor.visible = false;
+        Time.timeScale = 1;
     }
 
     public void OpenSettings()
     {
-        painelMainMenu.SetActive(false);
+        painelMenu.SetActive(false);
         painelSettings.SetActive(true);
     }
 
     public void CloseSettings()
     {
         painelSettings.SetActive(false);
-        painelMainMenu.SetActive(true);
+        painelMenu.SetActive(true);
     }
 
     public void Sair()

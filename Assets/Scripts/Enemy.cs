@@ -5,16 +5,20 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float Speed;
-    public int Life = 10;
+    
+    public int Life = 0;
+    
     private int currentHealth;
+    
     private GameObject player;
+    
     private UnityEngine.AI.NavMeshAgent navMesh;
+    
     private bool CanAttack;
+
     public int attackDamage;
 
     public Animator anim;
-
-    
 
     void Start()
     {
@@ -22,7 +26,6 @@ public class Enemy : MonoBehaviour
         player = GameObject.FindWithTag ("Player");
         navMesh = GetComponent<UnityEngine.AI.NavMeshAgent>();
         currentHealth = Life;
-
     }
     
     void Update()
@@ -36,6 +39,15 @@ public class Enemy : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentHealth == 0)
+        {
+            CanAttack = false;
+            navMesh.destination = transform.position;
         }
     }
 
@@ -66,23 +78,20 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        Debug.Log("Enemy died");
-
         if (currentHealth == 0)
         {
             CanAttack = false;
             navMesh.destination = transform.position;
         }
-
         anim.SetBool("Die", true);
     }
 
         IEnumerator TimeToAttack()
-    {
+        {
         CanAttack = false;
         yield return new WaitForSeconds(1);
         CanAttack = true;
-    }
+        }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -91,9 +100,9 @@ public class Enemy : MonoBehaviour
             currentHealth -= attackDamage;
         }
 
-        if (currentHealth <= 0)
+        if (currentHealth == 0)
         {
-            Destroy(gameObject);
+            anim.SetBool("Die", true);
         }
     }
 }

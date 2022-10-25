@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 public class RestartFase : MonoBehaviour
 {
 
-    [SerializeField] private string nameOfGame;
-    [SerializeField] private string nameOfGame2;
-    [SerializeField] private GameObject TelaRestart;
+    [SerializeField] private string nameOfGame; //Button tentar novamente
+    [SerializeField] private string nameOfGame2; //Button voltar ao menu principal
+    [SerializeField] private GameObject TelaRestart; //tela de restart
 
     public void start()
     {

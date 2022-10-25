@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class ControladorMenu : MonoBehaviour
 {
-    //private bool menuOn = false;
-    //private GameObject Options;
 
     [SerializeField] private GameObject Options;
     [SerializeField] private GameObject MenuJogo;

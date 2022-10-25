@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 public class MainMenuManager : MonoBehaviour
 {
 
-    [SerializeField] private string nameOfGame;
+    [SerializeField] private string nameOfGame; //cena do jogo
 
-    [SerializeField] private GameObject painelMainMenu;
-    [SerializeField] private GameObject painelSettings;
+    [SerializeField] private GameObject painelMainMenu; //menu principal
+    [SerializeField] private GameObject painelSettings; //opções do jogo no menu principal
 
     public void start()
     {
@@ -19,6 +19,7 @@ public class MainMenuManager : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene(nameOfGame);
+        Time.timeScale = 1;
     }
 
     public void OpenSettings()
@@ -35,6 +36,6 @@ public class MainMenuManager : MonoBehaviour
 
     public void ExitGame()
     {
-        Application.Quit();
+        Application.Quit(); //fecha o jogo
     }
 }

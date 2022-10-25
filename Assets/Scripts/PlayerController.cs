@@ -8,31 +8,41 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private string nameOfGame;
 
     public int vidaAtual;
+
     private int vidaTotal = 100;
 
     [SerializeField] private BarraDeVida barraDeVida;
 
     public float Speed;
+
     public Animator anim;
 
     private CharacterController characterController;
 
     [SerializeField]private AudioSource passosAudioSource;
+    
     [SerializeField]private AudioClip[] passosAudioClip;
 
     float InputX;
+    
     float InputZ;
+    
     Vector3 Direction;
+    
     public Camera MainCamera;
 
     [SerializeField] private GameObject MenuGame;
 
     public Rigidbody rb;
+    
     public float JumpForce;
 
     public LayerMask layerMask;
+    
     public bool IsGrounded;
+    
     public float GroundCheckSize;
+    
     public Vector3 GroundCheckPosition;
 
     void Awake()
@@ -45,15 +55,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         vidaAtual = vidaTotal;
-
         Cursor.visible = false;
-
         barraDeVida.AlterarBarraDeVida(vidaAtual, vidaTotal);
     }
     
     void Update()
     {
-
         InputX = Input.GetAxis("Horizontal");
         InputZ = Input.GetAxis("Vertical");
         Direction = new Vector3(InputX, 0, InputZ);
@@ -103,7 +110,6 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
             anim.SetBool("Jump", true);
         }
-
     }
 
     private void OnDrawGizmos()
