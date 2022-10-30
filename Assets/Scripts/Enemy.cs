@@ -61,8 +61,10 @@ public class Enemy : MonoBehaviour
         if (CanAttack == true)
         {
             StartCoroutine("TimeToAttack");
+            StartCoroutine("AnimAttack");
             player.GetComponent<PlayerController>().vidaAtual -= 10;
-            anim.SetBool("attack", true);
+            //anim.SetBool("attack", true);
+            navMesh.destination = transform.position;
         }
     }
 
@@ -91,6 +93,13 @@ public class Enemy : MonoBehaviour
         CanAttack = false;
         yield return new WaitForSeconds(1);
         CanAttack = true;
+        }
+
+        IEnumerator AnimAttack()
+        {
+        anim.SetBool("attack", false);
+        yield return new WaitForSeconds(1);
+        anim.SetBool("attack", true);
         }
 
     private void OnTriggerEnter(Collider other)
