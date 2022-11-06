@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
     
     public int Life = 0;
     
-    private int currentHealth;
+    public int currentHealth;
     
     private GameObject player;
     
@@ -36,6 +36,11 @@ public class Enemy : MonoBehaviour
         {
             Attack();
         }
+        else
+        {
+            Andar();
+            anim.SetBool("attack", false);
+        }
         if (currentHealth <= 0)
         {
             Die();
@@ -44,10 +49,9 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         {
-            CanAttack = false;
-            navMesh.destination = transform.position;
+            Die();
         }
     }
 
@@ -62,30 +66,25 @@ public class Enemy : MonoBehaviour
         {
             StartCoroutine("TimeToAttack");
             StartCoroutine("AnimAttack");
-            player.GetComponent<PlayerController>().vidaAtual -= 10;
-            //anim.SetBool("attack", true);
-            navMesh.destination = transform.position;
+            player.GetComponent<PlayerController>().vidaAtual -= 5;
+            anim.SetBool("attack", true);
         }
     }
 
     public void TakeDamage(int attackDamage)
     {
         currentHealth -= attackDamage;
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
     }
 
     void Die()
     {
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         {
-            CanAttack = false;
-            navMesh.destination = transform.position;
+           CanAttack = false;
+           navMesh.destination = transform.position;
+            anim.SetBool("attack", false);
+           anim.SetBool("Die", true);
         }
-        anim.SetBool("Die", true);
     }
 
         IEnumerator TimeToAttack()
@@ -104,14 +103,9 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "dragon_slayer")
+        if (other.gameObject.tag == "DragonSlayer")
         {
             currentHealth -= attackDamage;
-        }
-
-        if (currentHealth == 0)
-        {
-            anim.SetBool("Die", true);
         }
     }
 }

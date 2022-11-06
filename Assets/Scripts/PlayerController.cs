@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public int vidaAtual;
 
-    private int vidaTotal = 100;
+    [SerializeField]private int vidaTotal = 100;
 
     [SerializeField] private BarraDeVida barraDeVida;
 
@@ -45,8 +45,11 @@ public class PlayerController : MonoBehaviour
     
     public Vector3 GroundCheckPosition;
 
+    public bool CanAtaque;
+
     void Awake()
     {
+        CanAtaque = true;
         characterController = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         transform.tag = "Player";
@@ -61,21 +64,42 @@ public class PlayerController : MonoBehaviour
     
     void Update()
     {
-        InputX = Input.GetAxis("Horizontal");
-        InputZ = Input.GetAxis("Vertical");
-        Direction = new Vector3(InputX, 0, InputZ);
-        if (InputX != 0 || InputZ != 0)
+        if (CanAtaque == true)
         {
-            var camrot = MainCamera.transform.rotation;
-            camrot.x = 0;
-            camrot.z = 0;
-            transform.Translate(0, 0, Speed * Time.deltaTime);
-            anim.SetBool("Run", true);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(Direction) * camrot, 5 * Time.deltaTime);
-        }
-        if (InputX == 0 && InputZ == 0)
-        {
-            anim.SetBool("Run", false);
+            InputX = Input.GetAxis("Horizontal");
+            InputZ = Input.GetAxis("Vertical");
+            Direction = new Vector3(InputX, 0, InputZ);
+            if (InputX != 0 || InputZ != 0)
+            {
+                var camrot = MainCamera.transform.rotation;
+                camrot.x = 0;
+                camrot.z = 0;
+                transform.Translate(0, 0, Speed * Time.deltaTime);
+                anim.SetBool("Run", true);
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(Direction) * camrot, 5 * Time.deltaTime);
+            }
+            if (InputX == 0 && InputZ == 0)
+            {
+                anim.SetBool("Run", false);
+            }
+
+            var groundcheck = Physics.OverlapSphere(transform.position + GroundCheckPosition, GroundCheckSize, layerMask);
+
+            if (groundcheck.Length != 0)
+            {
+                IsGrounded = true;
+            }
+            else
+            {
+                IsGrounded = false;
+            }
+            anim.SetBool("Jump", !IsGrounded);
+
+            if (IsGrounded == true && Input.GetKeyDown(KeyCode.Space))
+            {
+                rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
+                anim.SetBool("Jump", true);
+            }
         }
         if (vidaAtual <= 0)
         {
@@ -92,24 +116,6 @@ public class PlayerController : MonoBehaviour
             Pause();
             AbreMenu();
         }
-        
-        var groundcheck = Physics.OverlapSphere(transform.position + GroundCheckPosition, GroundCheckSize, layerMask);
-
-        if (groundcheck.Length != 0)
-        {
-            IsGrounded = true;
-        }
-        else
-        {
-            IsGrounded = false;
-        }
-        anim.SetBool("Jump", !IsGrounded);
-
-        if(IsGrounded == true && Input.GetKeyDown(KeyCode.Space))
-        {
-            rb.AddForce(transform.up * JumpForce, ForceMode.Impulse);
-            anim.SetBool("Jump", true);
-        }
     }
 
     private void OnDrawGizmos()
@@ -123,9 +129,19 @@ public class PlayerController : MonoBehaviour
         MenuGame.SetActive(true);
     }
 
+    public void FechaMenu()
+    {
+        MenuGame.SetActive(false);
+    }
+
     public void Pause()
     {
         Time.timeScale = 0;
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = 1;
     }
 
     void Death()

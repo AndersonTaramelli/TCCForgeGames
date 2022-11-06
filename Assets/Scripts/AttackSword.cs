@@ -12,6 +12,10 @@ public class AttackSword : MonoBehaviour
 
     public int AttackDamage = 0;
 
+    public PlayerController player;
+
+    public Sword sword;
+
     void Start()
     {
         Anim = gameObject.GetComponent<Animator>();
@@ -20,18 +24,39 @@ public class AttackSword : MonoBehaviour
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
-        { 
-            Numclicks++;
-            if(Numclicks == 1)
-            {
-                Anim.SetBool("1", true);
-            }
-            else
-            {
-                Anim.SetBool("1", false);
-                Numclicks = 0;
-                Anim.SetBool("Idle", true);
-            }
+        {
+            Anim.SetTrigger("Ataque");
+            //Numclicks++;
+            //if(Numclicks == 1)
+            //{
+              //  Anim.SetBool("1", true);
+               // Numclicks = 0;
+            //}
+            //else
+            //{
+              //  Anim.SetBool("1", false);
+               // Numclicks = 0;
+            //}
         }
+        //Debug.Log("numeros de cliques" + Numclicks);
+    }
+
+    public void Atacando()
+    {
+        player.CanAtaque = false;
+    }
+
+    public void NaoAtaca()
+    {
+        player.CanAtaque = true;
+    }
+    public void AtaqueEspada()
+    {
+        sword.GetComponent<BoxCollider>().enabled = true;
+    }
+
+    public void NaoAtaqueEspada()
+    {
+        sword.GetComponent<BoxCollider>().enabled = false;
     }
 }
