@@ -14,14 +14,4 @@ public class Sword : MonoBehaviour
     {
         return this.dano;
     }
-
-    //void OnTriggerEnter(Collider sword)
-    //{
-    //sword
-    //}
-
-    // void OnTriggerExit(Collider sword)
-    // {
-    //     sword.enabled = false;
-    //  }
 }

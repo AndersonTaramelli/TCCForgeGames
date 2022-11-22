@@ -20,30 +20,52 @@ public class Enemy : MonoBehaviour
 
     public Animator anim;
 
+    public int QuantidadeDeMortos = 0;
+
+    [SerializeField]private GameObject inimigo;
+
+    void Awake()
+    {
+        currentHealth = Life;
+    }
+
     void Start()
     {
         CanAttack = true;
         player = GameObject.FindWithTag ("Player");
         navMesh = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        currentHealth = Life;
     }
     
     void Update()
     {
-        Andar();
-        navMesh.destination = player.transform.position;
-        if (Vector3.Distance(transform.position,player.transform.position) < 1.5f)
+        if (Vector3.Distance(player.transform.position, transform.position) < 10.0f)
         {
-            Attack();
+            Andar();
+            navMesh.destination = player.transform.position;
+            if (Vector3.Distance(transform.position, player.transform.position) < 1.8f)
+            {
+                Attack();
+            }
+            else
+            {
+                Andar();
+                anim.SetBool("attack", false);
+            }
+            if (currentHealth <= 0)
+            {
+                Die();
+            }
+            if(player.GetComponent<PlayerController>().vidaAtual == 0)
+            {
+                CanAttack = false;
+                anim.SetBool("attack", false);
+                anim.SetBool("Corre", false);
+            }
         }
         else
         {
-            Andar();
-            anim.SetBool("attack", false);
-        }
-        if (currentHealth <= 0)
-        {
-            Die();
+            navMesh.destination = transform.position;
+            anim.SetBool("Corre", false);
         }
     }
 
@@ -52,6 +74,11 @@ public class Enemy : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die();
+        }
+        if(player.GetComponent<PlayerController>().vidaAtual == 0)
+        {
+            navMesh.destination = player.transform.position;
+            anim.SetBool("attack", false);
         }
     }
 
@@ -82,8 +109,8 @@ public class Enemy : MonoBehaviour
         {
            CanAttack = false;
            navMesh.destination = transform.position;
-            anim.SetBool("attack", false);
-           anim.SetBool("Die", true);
+           anim.SetBool("attack", false);
+           StartCoroutine("TimeToDeath");
         }
     }
 
@@ -99,6 +126,14 @@ public class Enemy : MonoBehaviour
         anim.SetBool("attack", false);
         yield return new WaitForSeconds(1);
         anim.SetBool("attack", true);
+        }
+
+    [System.Obsolete]
+    IEnumerator TimeToDeath()
+        {
+        anim.SetBool("Die", true);
+        yield return new WaitForSeconds(4);
+        DestroyObject(inimigo);
         }
 
     private void OnTriggerEnter(Collider other)

@@ -16,6 +16,10 @@ public class AttackSword : MonoBehaviour
 
     public Sword sword;
 
+    private float Cowldown = 1.0f;
+
+    private float CowldownTimer;
+
     void Start()
     {
         Anim = gameObject.GetComponent<Animator>();
@@ -23,22 +27,21 @@ public class AttackSword : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (CowldownTimer > 0)
         {
-            Anim.SetTrigger("Ataque");
-            //Numclicks++;
-            //if(Numclicks == 1)
-            //{
-              //  Anim.SetBool("1", true);
-               // Numclicks = 0;
-            //}
-            //else
-            //{
-              //  Anim.SetBool("1", false);
-               // Numclicks = 0;
-            //}
+            CowldownTimer -= Time.deltaTime;
         }
-        //Debug.Log("numeros de cliques" + Numclicks);
+
+        if (CowldownTimer < 0)
+        {
+            CowldownTimer = 0;
+        }
+
+        if (Input.GetButtonDown("Fire1") && CowldownTimer == 0)
+        {
+            Ataque();
+            CowldownTimer = Cowldown;
+        }
     }
 
     public void Atacando()
@@ -58,5 +61,10 @@ public class AttackSword : MonoBehaviour
     public void NaoAtaqueEspada()
     {
         sword.GetComponent<BoxCollider>().enabled = false;
+    }
+
+    void Ataque()
+    {
+        Anim.SetTrigger("Ataque");
     }
 }
