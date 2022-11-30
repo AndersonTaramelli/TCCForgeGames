@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private GeneralSword generalSword;
+
     [SerializeField] private string nameOfGame;
 
     public int vidaAtual;
@@ -58,6 +60,8 @@ public class PlayerController : MonoBehaviour
     private float Cowldown1 = 1.0f;
 
     private float CowldownTimer1;
+
+    private int attackDamage = 20;
 
     void Awake()
     {
@@ -223,5 +227,13 @@ public class PlayerController : MonoBehaviour
         GUI.color = Color.black;
         GUI.Label(new Rect(50, 250, 400, 20), "Tempo de recarga do especial: " + CowldownTimer.ToString("00"), Fonte);
         Fonte.fontSize = 32;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Excalibur")
+        {
+            vidaAtual -= attackDamage;
+        }
     }
 }

@@ -20,9 +20,7 @@ public class Enemy : MonoBehaviour
 
     public Animator anim;
 
-    public int QuantidadeDeMortos = 0;
-
-    [SerializeField]private GameObject inimigo;
+    [SerializeField] private GameObject inimigo;
 
     void Awake()
     {
