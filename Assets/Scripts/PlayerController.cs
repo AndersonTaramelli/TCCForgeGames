@@ -63,6 +63,12 @@ public class PlayerController : MonoBehaviour
 
     private int attackDamage = 20;
 
+    [SerializeField]private bool checkpoint = false;
+
+    [SerializeField] private string cenaAtual;
+
+    [SerializeField] private string cenaMenu;
+
     void Awake()
     {
         CanAtaque = true;
@@ -77,6 +83,7 @@ public class PlayerController : MonoBehaviour
         Fonte = new GUIStyle();
         Cursor.visible = false;
         barraDeVida.AlterarBarraDeVida(vidaAtual, vidaTotal);
+        cenaMenu = SceneManager.GetActiveScene().name;
     }
     
     void Update()
@@ -100,6 +107,10 @@ public class PlayerController : MonoBehaviour
                 anim.SetBool("Correr", false);
             }
         }
+        //if(Input.GetKeyDown(KeyCode.R))
+        //{
+          //  anim.SetBool("senta", true);
+        //}
 
             var groundcheck = Physics.OverlapSphere(transform.position + GroundCheckPosition, GroundCheckSize, layerMask);
 
@@ -137,6 +148,10 @@ public class PlayerController : MonoBehaviour
             Cursor.visible = true;
             CanAtaque = false;
             StartCoroutine("TimeToDeath");
+            if (checkpoint == true)
+            {
+                SceneManager.LoadScene(cenaAtual);
+            }
         }
 
         barraDeVida.AlterarBarraDeVida(vidaAtual, vidaTotal);
@@ -163,12 +178,6 @@ public class PlayerController : MonoBehaviour
             Heal();
             CowldownTimer = Cowldown;
         }
-    }
-
-    void FixedUpdate()
-    {
-        
-
     }
 
     private void OnDrawGizmos()
@@ -234,6 +243,14 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.tag == "Excalibur")
         {
             vidaAtual -= attackDamage;
+        }
+        if (other.gameObject.tag == "restauradorVida")
+        {
+            vidaAtual = 100;
+        }
+        if (other.gameObject.tag == "RestartBoss")
+        {
+            checkpoint = true;
         }
     }
 }

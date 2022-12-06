@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(UnityEngine.AI.NavMeshAgent))]
 
 public class GeneralEnemy : MonoBehaviour
@@ -25,6 +26,8 @@ public class GeneralEnemy : MonoBehaviour
     public GeneralSword sword;
 
     [SerializeField] private BarraDeVida barraDeVida;
+
+    [SerializeField] private string nameofgame;
 
     void Awake()
     {
@@ -137,6 +140,8 @@ public class GeneralEnemy : MonoBehaviour
         anim.SetBool("Die", true);
         yield return new WaitForSeconds(4);
         DestroyObject(BossArturia);
+        SceneManager.LoadScene(nameofgame);
+        Cursor.visible = true;
     }
 
     private void OnTriggerEnter(Collider other)

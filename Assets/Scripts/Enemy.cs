@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour
         {
             Andar();
             navMesh.destination = player.transform.position;
-            if (Vector3.Distance(transform.position, player.transform.position) < 1.8f)
+            if (Vector3.Distance(transform.position, player.transform.position) < 1.9f)
             {
                 Attack();
             }
